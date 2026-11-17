@@ -1,6 +1,8 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".main-nav");
 const yearEl = document.getElementById("year");
+const contactForm = document.getElementById("contact-form");
+const contactFormStatus = document.getElementById("contact-form-status");
 const navLinks = document.querySelectorAll(".main-nav a[href^='#']");
 const observedSections = Array.from(navLinks)
   .map(link => document.querySelector(link.getAttribute("href")))
@@ -81,3 +83,28 @@ window.addEventListener("resize", () => {
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
+
+if (contactForm && contactFormStatus) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(contactForm);
+    const subject = formData.get("subject");
+    const message = [
+      `Nombre: ${formData.get("name")}`,
+      `Empresa: ${formData.get("company")}`,
+      `Correo electrónico: ${formData.get("email")}`,
+      `Teléfono: ${formData.get("phone") || "No indicado"}`,
+      `Asunto: ${subject}`,
+      "",
+      "Descripción:",
+      formData.get("description")
+    ].join("\n");
+    const emailParameters = new URLSearchParams({
+      subject: `Contacto GEMEV: ${subject}`,
+      body: message
+    });
+
+    contactFormStatus.dataset.state = "info";
+    contactFormStatus.textContent = "Se abrirá tu aplicación de correo con el mensaje listo. Recuerda pulsar Enviar.";
+    window.location.href = `mailto:contacto@gemev.co?${emailParameters.toString()}`;
+  });}

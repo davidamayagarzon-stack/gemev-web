@@ -169,13 +169,52 @@
       </div>
     </section>
 
-    <section class="final-cta" id="contacto">
+    <section class="final-cta" id="contacto" aria-labelledby="contact-title">
       <div class="orb final-orb"></div>
-      <div class="container final-content">
-        <p class="eyebrow">GEMEV</p>
-        <h2>Construyamos juntos<br>la movilidad del futuro.</h2>
-        <p>¿Quieres hacer parte del gremio de electromovilidad de Colombia?</p>
-        <a class="button button-dark" href="mailto:contacto@gemev.co">Contáctanos <span>→</span></a>
+      <div class="container contact-grid">
+        <div class="contact-intro">
+          <p class="eyebrow">HABLEMOS</p>
+          <h2 id="contact-title">Construyamos juntos la movilidad del futuro.</h2>
+          <p>Cuéntanos sobre tu empresa y cómo podemos trabajar juntos en el ecosistema de electromovilidad.</p>
+          <p class="contact-email">¿Prefieres el correo? <a href="mailto:contacto@gemev.co">contacto@gemev.co</a></p>
+        </div>
+
+        <form class="contact-form" id="contact-form">
+          <div class="form-field">
+            <label for="contact-name">Nombre</label>
+            <input id="contact-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="form-field">
+            <label for="contact-company">Empresa</label>
+            <input id="contact-company" name="company" type="text" autocomplete="organization" required>
+          </div>
+          <div class="form-field">
+            <label for="contact-email">Correo electrónico</label>
+            <input id="contact-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-field">
+            <label for="contact-phone">Teléfono <span>(opcional)</span></label>
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="form-field form-field-full">
+            <label for="contact-subject">Asunto</label>
+            <select id="contact-subject" name="subject" required>
+              <option value="" selected disabled>Selecciona un asunto</option>
+              <option value="Afiliación">Quiero afiliar mi empresa</option>
+              <option value="Alianzas">Alianzas y proyectos</option>
+              <option value="Eventos">Eventos</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-field form-field-full">
+            <label for="contact-description">Descripción</label>
+            <textarea id="contact-description" name="description" rows="5" maxlength="1500" required></textarea>
+          </div>
+          <div class="form-field-full">
+            <button class="button button-dark contact-submit" type="submit">Preparar correo <span>→</span></button>
+            <p class="form-status" id="contact-form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
       </div>
     </section>
   </main>
