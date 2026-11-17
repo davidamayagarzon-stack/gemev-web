@@ -1,6 +1,9 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".main-nav");
 const yearEl = document.getElementById("year");
+const calendarMonthLabel = document.getElementById("calendar-month");
+const calendarDays = document.getElementById("calendar-days");
+const upcomingEvent = document.querySelector(".upcoming-event[data-calendar-date]");
 const navLinks = document.querySelectorAll(".main-nav a[href^='#']");
 const observedSections = Array.from(navLinks)
   .map(link => document.querySelector(link.getAttribute("href")))
@@ -80,4 +83,40 @@ window.addEventListener("resize", () => {
 
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
+}
+
+if (calendarMonthLabel && calendarDays && upcomingEvent) {
+  const [year, month, day] = upcomingEvent.dataset.calendarDate.split("-").map(Number);
+  const eventDate = new Date(year, month - 1, day);
+  const monthLabel = eventDate.toLocaleDateString("es-CO", { month: "long", year: "numeric" });
+  const weekdayOffset = (new Date(year, month - 1, 1).getDay() + 6) % 7;
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const cellCount = Math.ceil((weekdayOffset + daysInMonth) / 7) * 7;
+  const eventTitle = upcomingEvent.querySelector("h3").textContent;
+
+  calendarMonthLabel.textContent = monthLabel;
+  calendarDays.setAttribute("aria-label", `Calendario de ${monthLabel}`);
+
+  for (let index = 0; index < cellCount; index += 1) {
+    const date = new Date(year, month - 1, index - weekdayOffset + 1);
+    const calendarDay = document.createElement("span");
+    calendarDay.className = "calendar-day";
+    calendarDay.textContent = String(date.getDate());
+
+    if (date.getMonth() !== month - 1) {
+      calendarDay.classList.add("outside-month");
+      calendarDay.setAttribute("aria-hidden", "true");
+    }
+
+    if (date.getTime() === eventDate.getTime()) {
+      calendarDay.classList.add("has-event");
+      calendarDay.setAttribute("aria-label", `${date.toLocaleDateString("es-CO", {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+      })}: ${eventTitle}`);
+    }
+
+    calendarDays.appendChild(calendarDay);
+  }
 }
