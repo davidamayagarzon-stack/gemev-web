@@ -119,10 +119,24 @@ img{max-width:100%;display:block}
 .event-description{max-width:560px;color:var(--muted);font-size:15px;margin:0 0 24px}
 
 .final-cta{position:relative;overflow:hidden;background:var(--teal);color:var(--black);padding:110px 0}
-.final-content{position:relative;z-index:2;text-align:center}
-.final-content .eyebrow{color:var(--black)}
-.final-content h2{font-size:56px}
-.final-content>p:not(.eyebrow){font-size:18px;margin-bottom:30px}
+.contact-grid{position:relative;z-index:2;display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center}
+.contact-intro .eyebrow{color:var(--black)}
+.contact-intro h2{font-size:clamp(38px,4.5vw,56px);line-height:1.08;letter-spacing:-2px;margin:0 0 18px}
+.contact-intro>p:not(.eyebrow){font-size:18px;margin:0 0 28px}
+.contact-email{font-size:15px!important}
+.contact-email a{font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:32px;border:1px solid rgba(0,0,0,.14);border-radius:14px;background:rgba(0,0,0,.9);color:var(--text)}
+.form-field{display:flex;flex-direction:column;gap:7px}
+.form-field-full{grid-column:1/-1}
+.form-field label{font-size:13px;font-weight:700}
+.form-field label span{color:var(--muted);font-weight:400}
+.form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid rgba(255,255,255,.16);border-radius:5px;background:#111718;color:var(--text);font:inherit;font-size:14px;padding:12px}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:2px solid var(--teal-light);outline-offset:1px}
+.form-field textarea{resize:vertical;min-height:120px}
+.form-field select:invalid{color:var(--muted)}
+.contact-submit{border:0;cursor:pointer}
+.form-status{min-height:1.5em;margin:12px 0 0;color:#f4c8b9;font-size:13px}
+.form-status[data-state="info"]{color:var(--text)}
 .final-orb{width:550px;height:550px;right:-250px;top:-260px;background:rgba(105,41,70,.24)}
 
 .footer{background:var(--black);padding:35px 0}
@@ -133,9 +147,10 @@ img{max-width:100%;display:block}
   .main-nav{gap:20px}
   .hero-content{padding-left:5%}
   .member-grid{grid-template-columns:repeat(3,1fr)}
-  .why-grid,.join-grid{grid-template-columns:1fr}
+  .why-grid,.join-grid,.contact-grid{grid-template-columns:1fr}
   .energy-symbol{margin-top:30px}
   .sector-grid{grid-template-columns:1fr}
+  .contact-grid{gap:36px}
 }
 
 @media (max-width: 700px){
@@ -153,7 +168,7 @@ img{max-width:100%;display:block}
   .hero-copy{font-size:16px}
   .button{width:100%}
   .member-grid{grid-template-columns:repeat(2,1fr)}
-  .section-heading h2,.why h2,.join-banner h2,.final-cta h2{font-size:38px}
+  .section-heading h2,.why h2,.join-banner h2,.contact-intro h2{font-size:38px}
   .join-banner{padding:75px 0}
   .energy-symbol{width:190px;height:190px;font-size:75px}
   .why{padding:80px 0}
@@ -216,4 +231,6 @@ body{overflow-x:hidden}
   .sectors{padding:90px 0 105px}
   .sector-card,.sector-card.wide{min-height:0}
   .final-cta{padding:95px 0 110px}
+  .contact-form{grid-template-columns:1fr;padding:22px}
+  .form-field-full{grid-column:1}
 }
